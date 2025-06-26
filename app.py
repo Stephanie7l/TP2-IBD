@@ -55,6 +55,7 @@ elif opcao.startswith("3"):
         WHERE p.tipo = 'Jurídica'
         GROUP BY pr.especie;
     """, conn)
+    st.dataframe(df)
     fig, ax = plt.subplots()
     ax.pie(df["total"], labels=df["especie"], autopct="%1.1f%%", startangle=90)
     st.pyplot(fig)
@@ -78,6 +79,7 @@ elif opcao.startswith("5"):
         GROUP BY embalagem
         ORDER BY total DESC;
     """, conn)
+    st.dataframe(df)
     fig, ax = plt.subplots()
     ax.bar(df["embalagem"], df["total"])
     plt.xticks(rotation=45)
@@ -109,6 +111,7 @@ elif opcao.startswith("7"):
     """, conn)
     df["data_envio"] = pd.to_datetime(df["data_envio"], dayfirst=True)
     df = df.sort_values("data_envio")
+    st.dataframe(df)
     fig, ax = plt.subplots()
     ax.plot(df["data_envio"], df["total_branco"], marker="o")
     st.pyplot(fig)
@@ -132,6 +135,7 @@ elif opcao.startswith("9"):
         JOIN Pessoa p ON d.id_pessoa = p.id
         GROUP BY p.tipo;
     """, conn)
+    st.dataframe(df)
     fig, ax = plt.subplots()
     ax.bar(df["tipo_pessoa"], df["total_kg"])
     st.pyplot(fig)
@@ -145,6 +149,7 @@ elif opcao.startswith("10"):
         GROUP BY pr.especie
         ORDER BY media_kg DESC;
     """, conn)
+    st.dataframe(df)
     fig, ax = plt.subplots()
     ax.barh(df["especie"], df["media_kg"])
     st.pyplot(fig)
