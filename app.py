@@ -25,6 +25,7 @@ opcao = st.sidebar.selectbox("Selecione uma consulta:", [
 
 # Consulta 1
 if opcao.startswith("1"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT d.data_envio, m.estado, m.nome AS municipio, d.local_armazenamento
         FROM Declaracao d
@@ -36,6 +37,7 @@ if opcao.startswith("1"):
 
 # Consulta 2
 elif opcao.startswith("2"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT DISTINCT m.nome AS municipio, m.estado
         FROM Declaracao d
@@ -46,6 +48,7 @@ elif opcao.startswith("2"):
 
 # Consulta 3
 elif opcao.startswith("3"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT pr.especie, SUM(e.quantidade_kg) AS total
         FROM Estoque e
@@ -64,6 +67,7 @@ elif opcao.startswith("3"):
 
 # Consulta 4
 elif opcao.startswith("4"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT d.local_armazenamento, pr.especie, e.quantidade_kg
         FROM Estoque e
@@ -75,6 +79,7 @@ elif opcao.startswith("4"):
 
 # Consulta 5
 elif opcao.startswith("5"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT embalagem, COUNT(*) AS total
         FROM Declaracao
@@ -93,6 +98,7 @@ elif opcao.startswith("5"):
 
 # Consulta 6
 elif opcao.startswith("6"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT m.nome AS municipio, pr.especie, SUM(e.quantidade_kg) AS total_kg
         FROM Estoque e
@@ -106,6 +112,7 @@ elif opcao.startswith("6"):
 
 # Consulta 7
 elif opcao.startswith("7"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT d.data_envio, SUM(e.quantidade_kg) AS total_branco
         FROM Estoque e
@@ -129,6 +136,7 @@ elif opcao.startswith("7"):
 
 # Consulta 8
 elif opcao.startswith("8"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT DISTINCT pr.especie, d.apresentacao
         FROM Estoque e
@@ -139,6 +147,7 @@ elif opcao.startswith("8"):
 
 # Consulta 9
 elif opcao.startswith("9"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT p.tipo AS tipo_pessoa, SUM(e.quantidade_kg) AS total_kg
         FROM Estoque e
@@ -157,6 +166,7 @@ elif opcao.startswith("9"):
 
 # Consulta 10
 elif opcao.startswith("10"):
+    st.subheader(opcao)
     df = pd.read_sql_query("""
         SELECT pr.especie, AVG(e.quantidade_kg) AS media_kg
         FROM Estoque e
