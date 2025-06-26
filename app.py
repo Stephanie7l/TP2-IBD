@@ -4,7 +4,7 @@ import sqlite3
 import matplotlib.pyplot as plt
 
 # Conectar ao banco de dados SQLite
-conn = sqlite3.connect("estoque_camarao.db")
+conn = sqlite3.connect("DeclaraçãoDeEstoque.db")
 
 st.title("📦 Declarações de Estoque de Camarão – Sudeste/Sul")
 st.markdown("Visualização interativa do Trabalho Prático 2 – Introdução a Banco de Dados")
