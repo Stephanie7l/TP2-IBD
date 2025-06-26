@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 # Conectar ao banco de dados SQLite
 conn = sqlite3.connect("estoque_camarao.db")
 
-st.title("📦 Declarações de Estoque de Camarão – Sudeste/Sul")
-st.markdown("Visualização interativa do Trabalho Prático 2 – Introdução a Banco de Dados")
+st.title("Trabalho Prático II - Introdução à Banco de Dados")
+st.markdown("### Visualização interativa do banco de dados \"Estoque de Camarão nas Regiões Brasileiras Sudeste e Sul\"")
 
 # Sidebar com seleção de consulta
 opcao = st.sidebar.selectbox("Selecione uma consulta:", [
@@ -56,8 +56,10 @@ elif opcao.startswith("3"):
         GROUP BY pr.especie;
     """, conn)
     st.dataframe(df)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 6))
     ax.pie(df["total"], labels=df["especie"], autopct="%1.1f%%", startangle=90)
+    ax.set_title("Distribuição por espécie - Pessoas Jurídicas")
+    plt.tight_layout()
     st.pyplot(fig)
 
 # Consulta 4
@@ -80,9 +82,13 @@ elif opcao.startswith("5"):
         ORDER BY total DESC;
     """, conn)
     st.dataframe(df)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 4))
     ax.bar(df["embalagem"], df["total"])
-    plt.xticks(rotation=45)
+    ax.set_title("Frequência de tipos de embalagem")
+    ax.set_xlabel("Tipo de Embalagem")
+    ax.set_ylabel("Nº de Declarações")
+    plt.xticks(rotation=45, ha="right")
+    plt.tight_layout()
     st.pyplot(fig)
 
 # Consulta 6
@@ -112,8 +118,13 @@ elif opcao.startswith("7"):
     df["data_envio"] = pd.to_datetime(df["data_envio"], dayfirst=True)
     df = df.sort_values("data_envio")
     st.dataframe(df)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8, 4))
     ax.plot(df["data_envio"], df["total_branco"], marker="o")
+    ax.set_title("Evolução de Camarão Branco por data")
+    ax.set_xlabel("Data")
+    ax.set_ylabel("Total (kg)")
+    plt.xticks(rotation=45, ha="right")
+    plt.tight_layout()
     st.pyplot(fig)
 
 # Consulta 8
@@ -136,8 +147,12 @@ elif opcao.startswith("9"):
         GROUP BY p.tipo;
     """, conn)
     st.dataframe(df)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 4))
     ax.bar(df["tipo_pessoa"], df["total_kg"])
+    ax.set_title("Total de camarões por tipo de pessoa")
+    ax.set_xlabel("Tipo de Pessoa")
+    ax.set_ylabel("Total (kg)")
+    plt.tight_layout()
     st.pyplot(fig)
 
 # Consulta 10
@@ -150,8 +165,12 @@ elif opcao.startswith("10"):
         ORDER BY media_kg DESC;
     """, conn)
     st.dataframe(df)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8, 5))
     ax.barh(df["especie"], df["media_kg"])
+    ax.set_title("Média de quilos por tipo de camarão")
+    ax.set_xlabel("Média (kg)")
+    ax.set_ylabel("Espécie")
+    plt.tight_layout()
     st.pyplot(fig)
 
 conn.close()
